@@ -1,0 +1,100 @@
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+using namespace std;
+
+void clearScreen() {
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
+void drawCross(int size, char texture) {
+    clearScreen();
+    
+    // Вывод шапки программы
+    cout << "[ 17 ] Самостоятельная работа | E+" << endl;
+    cout << "Тема: [ FOR ]" << endl;
+    cout << "Продолжение программы \"Геометрические фигуры\"." << endl;
+    cout << endl;
+    cout << "[ + ] Программа - \"Геометрические фигуры\"" << endl;
+    cout << "----------------------------------------" << endl << endl;
+    
+    // Информация о выбранной фигуре
+    cout << "[ + ] Фигура: \"Крестик\"" << endl << endl;
+    cout << "[ + ] Размер: \t" << size << endl;
+    cout << "[ + ] Текстура: \t" << texture << endl << endl;
+    cout << "[ + ] Результат:" << endl << endl;
+    
+    // Проверка на нечетность размера
+    if (size % 2 == 0) {
+        cout << "Для симметричного крестика рекомендуется нечетный размер." << endl;
+        cout << "Текущий размер: " << size << endl << endl;
+    }
+    
+    // Рисуем крестик
+    for (int row = 0; row < size; row++) {
+        for (int col = 0; col < size; col++) {
+            // Главная диагональ (row == col) или побочная диагональ (row + col == size - 1)
+            if (row == col || row + col == size - 1) {
+                cout << texture;
+            } else {
+                cout << ".";
+            }
+            
+            // Добавляем пробелы между символами (5 пробелов как в примере)
+            if (col < size - 1) {
+                cout << "     ";
+            }
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    clearScreen();
+    
+    // Главное меню
+    cout << "[ 17 ] Самостоятельная работа | E+" << endl;
+    cout << "Тема: [ FOR ]" << endl;
+    cout << "Продолжение программы \"Геометрические фигуры\"." << endl;
+    cout << endl;
+    cout << "[ + ] Программа - \"Геометрические фигуры\"" << endl;
+    cout << "----------------------------------------" << endl << endl;
+    
+    // Меню выбора фигур
+    cout << "Доступные фигуры:" << endl;
+    for (int i = 1; i <= 4; i++) {
+        cout << "[ " << i << " ] Фигура " << i << endl;
+    }
+    cout << "[ 5 ] Решетка" << endl;
+    cout << "[ 6 ] Крестик" << endl;
+    cout << "[ 0 ] Выход" << endl << endl;
+    
+    int choice;
+    cout << "[ + ] Выберите фигуру: ";
+    cin >> choice;
+    
+    if (choice == 6) {
+        int size;
+        char texture;
+        
+        cout << "[ + ] Размер: \t";
+        cin >> size;
+        
+        cout << "[ + ] Текстура: \t";
+        cin >> texture;
+        
+        drawCross(size, texture);
+    } else if (choice == 5) {
+        cout << "Фигура 'Решетка' будет реализована позже" << endl;
+    } else if (choice == 0) {
+        cout << "Выход из программы..." << endl;
+    } else {
+        cout << "Фигура №" << choice << " будет реализована позже." << endl;
+    }
+    
+    return 0;
+}
